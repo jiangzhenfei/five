@@ -43,10 +43,7 @@ io.on('connection', function (socket) {
   
     //用户进入链接
     socket.on('welcome', function (data) {
-        let id = socket.id;
         let room = data.room;
-        let user = data.user;
-        connectRoom[room][user]['id'] = id;
         io.emit('userInfo',connectRoom[room]);//通知前端用户信息
         if(  connectRoom[room].full ){
             io.emit('who',connectRoom[room]);//当满员通知前端谁先落棋
@@ -56,6 +53,12 @@ io.on('connection', function (socket) {
     //断开连接(清除该房间号)
     socket.on('disconnect', function (e,rgd) {
         console.log(e,rgd)
+    });
+
+    //关闭该房间，浏览器关闭则关闭该房间(清除该房间号)
+    socket.on('closeRoom', function ( room ) {
+        delete connectRoom[ room ]
+        io.emit('escap',room);//通知对手逃跑
     });
 });
 
