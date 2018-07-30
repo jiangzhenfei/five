@@ -1,0 +1,16 @@
+{
+  "name": "five",
+  "version": "1.0.0",
+  "description": "",
+  "main": "checkerboard.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "nodejs-websocket": "^1.7.1",
+    "socket.io": "^2.1.1"
+  }
+}
