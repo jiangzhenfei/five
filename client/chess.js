@@ -28,7 +28,6 @@ class GameEngin{
             '4':[ curren + 3*index, curren + 2*index, curren + index,curren, curren - index],
             '5':[ curren + 4*index, curren + 3*index, curren + 2*index, curren + index,curren],
         }
-        //console.log(this[Chess.color],winMap)
         
         let length = this[Chess.color].length
         for( var i = 0;i < length; i++ ){
