@@ -25,22 +25,43 @@
             height: 40px;
             background: transparent;
             border-radius: 50%;
-            cursor: pointer;
-            
+            cursor: pointer; 
         }
         .bordContainer canvas{   
             background: #ccc;
             border: 1px solid green
         }
+        .header{
+            height: 60px;
+            background: #f0faff;
+            position: relative;
+        }
+        .user,.room{
+            box-sizing: border-box;
+            display: inline-block;
+            height: 28px;
+            color:#666;
+            border: 1px solid #dcdee2;
+            border-radius: 4px;
+        }
+        .btn{
+            box-sizing: border-box;
+            display: inline-block;
+            height: 28px;
+            border: 1px solid #dcdee2;
+            border-radius: 4px;
+            background-color: #57a3f3;
+        }
         .userInfo{
-            position: fixed;
-            left:0;top:200px;
-            width: 50px;
-            height: 100px;
-            border: 1px solid #ccc;
+            float: left;
+            width: 100px;
+            height: 60px;
+            background-color:yellowgreen;;
         }
         .userInfo .user-item{
-            height: 50px;
+            height: 100%;
+            width: 50px;
+            float: left;
             color:#fff;
             font-size: 14px;
             font-weight: bold;
@@ -48,33 +69,36 @@
             text-align: center
         }
         .tip{
-            position: fixed;
-            top:0;
-            left: 40%;
+            float: left;
             width: 200px;
-            height: 50px;
-            background: #333;
-            color:#fff;
-            font-size: 14px;
+            height: 100%;
+            color:#2b85e4;
+            font-size: 16px;
             font-weight: bold;
-            line-height: 50px;
+            line-height: 60px;
             text-align: center
         }
     </style>
 </head>
 <body onbeforeunload="checkLeave()">
-    <!-- 用户信息 -->
-    <div class="userInfo"></div>
-    <!-- 谁先落棋提示 -->
-    <div class="tip"></div>
-    <!-- 用户名，房间号输入 -->
-    <div>
-        用户名<input type="text" class="user">
-    </div>
-    <div>
-        房间号<input type="text" class="room">
-    </div>
-    <button class="btn">进入</button>
+   <div class="header">
+        <!-- 用户名，房间号输入 -->
+        <div style="float: left;">
+            <div>
+                用户名<input type="text" class="user">
+            </div>
+            <div>
+                房间号<input type="text" class="room">
+            </div>
+        </div>
+        <div style="float: left;height: 60px;">
+            <button class="btn">进入</button>
+        </div>
+        <!-- 用户信息 -->
+        <div class="userInfo"></div>
+        <!-- 谁先落棋提示 -->
+        <div class="tip"></div>
+   </div>
     <!-- 棋盘 -->
     <div class="bordContainer">
         <canvas id="canvas" width="600" height="600"></canvas>

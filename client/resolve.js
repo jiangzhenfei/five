@@ -22,6 +22,7 @@ $('.btn').click((e)=>{
 
             //自己和对手棋子移动的监听
             socket.on('moveInfo', function (data) {
+                console.log(data)
                 let roleColor = data.role;
                 let id = data.id;
                 //将棋盘影藏的棋子显示，并且赋予颜色
@@ -41,13 +42,15 @@ $('.btn').click((e)=>{
 
             //监听该房间的用户信息，左边显示房间用户数量
             socket.on('userInfo', function (data) {
+                
                 if( data.full ){
                     canClick = true
                 }
                 $('.userInfo').html('')
                 for (var user in data){
-                    if( user!== 'full' ){
+                    if( user!== 'full' && user!=='event' ){
                         let curretUser = data[user]
+                        console.log(user)
                         let html = $(`<div class="user-item">${user}<div>`)
                         html.css({
                             backgroundColor: curretUser['role']
@@ -57,10 +60,10 @@ $('.btn').click((e)=>{
                 }
             });
 
-
+            //提示当前谁落子
             socket.on('who', function (data) {
                 for( var user in data){
-                    if ( user !== 'full' ){
+                    if ( user !== 'full' && user!=='event' ){
                         let curretUser = data[user]
                         if( curretUser.canDown ){
                             tipWho( user )
@@ -69,6 +72,16 @@ $('.btn').click((e)=>{
                     }
                 }
             });
+
+            //通知对手逃跑
+            socket.on('escap', function () {
+                canClick = false;//对手逃跑棋盘不给点击
+                resetChessBorad()//清空棋盘
+                gameEngin.reset()//将引擎数据清空
+                clearUserInfoAndTip()
+                alert('对手逃跑,请重新链接邀请别人...')
+            });
+
             //用户进入，发送后端，后端信息保存
             socket.on('connect', function () {
                 socket.emit( 'welcome',{ room:room, user:originUser } );
@@ -87,7 +100,15 @@ $('.btn').click((e)=>{
     })
 })
 
+function checkLeave(){
+    socket.emit('closeRoom',originRoom)
+}
 
+//情况该房间成员和提示字体
+function clearUserInfoAndTip(){
+    $('.userInfo').html('')
+    $('.tip').html('')
+}
 //提示哪个用户落子
 function tipWho(user){
     $('.tip').html('')
@@ -102,5 +123,6 @@ $('.bordContainer').on('click','.item',function(){
     if(gameEngin.allChess.includes( id )){//棋盘引擎防止一个地方多次点击
         return;
     }
+    //想后端提交落子的坐标
     socket.emit('move', { room:originRoom, id:id, role:role, user:originUser });
 })
