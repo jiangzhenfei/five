@@ -12,4 +12,4 @@ npm install
 ```bash
 node index.js
 ```
-#### 4.直接打开client文件夹内的index.html
+#### 4.浏览器直接打开client文件夹内的index.html
