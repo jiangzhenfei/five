@@ -12,4 +12,4 @@ npm install
 ```bash
 node index.js
 ```
-#### 4.浏览器直接打开client文件夹内的index.html
+#### 4.浏览器直接打开client文件夹内的index.html即可，如果想对战，开两个浏览器窗口即可，不同用户进入同一个房间就可以尝试了
