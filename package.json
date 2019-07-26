@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jquery": "^3.3.1",
+    "jquery": ">=3.4.0",
     "nodejs-websocket": "^1.7.1",
     "socket.io": "^2.1.1"
   }
